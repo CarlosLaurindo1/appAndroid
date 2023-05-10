@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         // Componentização (instruções básicas de estilização)
         primarySwatch: Colors.green,
       ),
+      //Busca os dados que são exigidos pela classe do MyHomePage e efetua o preenchimento da Variável criada na mesma classe, aqui dentro
       home: const MyHomePage(title: 'Título dessa página',),
     );
   }
@@ -67,11 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
+      _counter = _counter+ 2;
     });
   }
 
   @override
+  //estrutura do dart para passar o contexto da aplicação
+  //Context é a estrutura padrão para renderizar 
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
@@ -83,7 +86,9 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Center(child: Text(widget.title)),
+        //Aqui dentro eu posso colocar os parâmetros pertinentes a este widget sem afetar a todos os demais
+        backgroundColor: Colors.red,
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -103,22 +108,30 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
+
+          
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'You have pushed the button this many times:',
+              'Fica clicando no mais, para ver o que rola:',
+              //Aqui não preciso colocar como uma constante, pois a classe pai já é uma
+              style: TextStyle(color:Colors.black12, 
+              fontSize: 22),
             ),
             Text(
+              //Recebe a interpolação da variável counter criada na classe _MyHomePageState
               '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              //Aqui por sua vez, como o pai não é uma constante, precisamos definir como uma
+              style: const TextStyle(color:Colors.blue, 
+              fontSize: 32),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        tooltip: 'Adicionar mais 2',
+        child: const Icon(Icons.add_chart),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
